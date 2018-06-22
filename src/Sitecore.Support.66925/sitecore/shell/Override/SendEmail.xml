@@ -14,7 +14,7 @@
      
       <Stylesheet Src="FormBuilder.css" DeviceDependant="true"/>
 
-      <CodeBeside Type="Sitecore.Forms.Shell.UI.Dialogs.SendMailEditor,Sitecore.Forms.Core"/>
+      <CodeBeside Type="Sitecore.Support.Forms.Shell.UI.Dialogs.SendMailEditor,Sitecore.Support.66925"/>
 
       <ContextMenu ID="FromContextMenu" Width="100%" Height="10px"/>
       <ContextMenu ID="ToContextMenu" Width="100%" Height="10px"/>

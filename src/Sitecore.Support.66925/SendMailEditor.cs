@@ -1,10 +1,7 @@
-﻿using Sitecore;
-using Sitecore.Diagnostics;
+﻿using Sitecore.Diagnostics;
 using Sitecore.Form.Core.Utility;
 using Sitecore.Forms.Core.Data;
-using Sitecore.Forms.Shell.UI.Dialogs;
 using Sitecore.StringExtensions;
-using Sitecore.Web;
 using Sitecore.Web.UI.HtmlControls;
 using Sitecore.Web.UI.Sheer;
 using Sitecore.Web.UI.XmlControls;
@@ -12,9 +9,9 @@ using Sitecore.WFFM.Core.Resources;
 using System;
 using System.Text.RegularExpressions;
 
-namespace Sitecore.Forms.Shell.UI.Dialogs
+namespace Sitecore.Support.Forms.Shell.UI.Dialogs
 {
-  public class SendMailEditor : IDEHtmlEditorBase
+  public class SendMailEditor : Sitecore.Support.Forms.Shell.UI.Dialogs.IDEHtmlEditorBase
   {
     public static readonly string ccKey = "CC";
 
@@ -300,25 +297,26 @@ namespace Sitecore.Forms.Shell.UI.Dialogs
       string text = string.Join(string.Empty, "[", value, "]");
       switch (id)
       {
-        case "To":
-          SmartAdd(To, text);
-          SheerResponse.SetOuterHtml(id, To);
+        case "Subject":
+          {
+            Edit subject = Subject;
+            Edit edit = subject;
+            edit.Value += text;
+            SheerResponse.SetOuterHtml(id, Subject);
+            break;
+          }
+        case "CC":
+          SmartAdd(CC, text);
+          SheerResponse.SetOuterHtml(id, CC);
           break;
         case "From":
           SmartAdd(From, text);
           SheerResponse.SetOuterHtml(id, From);
           break;
-        case "CC":
-          SmartAdd(CC, text);
-          SheerResponse.SetOuterHtml(id, CC);
+        case "To":
+          SmartAdd(To, text);
+          SheerResponse.SetOuterHtml(id, To);
           break;
-        case "Subject":
-          {
-            Edit subject = Subject;
-            subject.Value += text;
-            SheerResponse.SetOuterHtml(id, Subject);
-            break;
-          }
       }
       SheerResponse.Eval("scForm.browser.closePopups();if (Sitecore.Forms.PopupMenu.activePopup != null && Sitecore.Forms.PopupMenu.activePopup.parentNode != null) {$(Sitecore.Forms.PopupMenu.activePopup).remove();}");
     }
